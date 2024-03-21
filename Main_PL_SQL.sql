@@ -120,7 +120,7 @@ BEGIN
     dbms_output.put_line('Table shift_nurse created.');  
     EXECUTE IMMEDIATE 'CREATE TABLE nurse (
     nurse_id            NUMBER NOT NULL,
-    deptartment_dept_id NUMBER NOT NULL,
+    department_dept_id NUMBER NOT NULL,
     person_person_id    NUMBER NOT NULL,
     CONSTRAINT nurse_pk PRIMARY KEY ( nurse_id ))';
     dbms_output.put_line('Table nurse created.');
@@ -128,7 +128,7 @@ BEGIN
     doctor_id           NUMBER NOT NULL,
     specialization      VARCHAR2(50),
     person_person_id    NUMBER NOT NULL,
-    deptartment_dept_id NUMBER NOT NULL,
+    department_dept_id NUMBER NOT NULL,
     CONSTRAINT doctor_pk PRIMARY KEY ( doctor_id ))';
     dbms_output.put_line('Table doctor created.');
     EXECUTE IMMEDIATE 'CREATE TABLE department (
@@ -177,4 +177,46 @@ BEGIN
     ADD CONSTRAINT health_report_patient_fk FOREIGN KEY ( patient_patient_id )
         REFERENCES patient ( patient_id )';
     dbms_output.put_line('FK Constarints for health_report.');
+    EXECUTE IMMEDIATE 'ALTER TABLE in_patient
+    ADD CONSTRAINT in_patient_patient_fk FOREIGN KEY ( patient_patient_id )
+        REFERENCES patient ( patient_id )';
+    dbms_output.put_line('FK Constarints for in_patient.');
+    EXECUTE IMMEDIATE 'ALTER TABLE medicine
+    ADD CONSTRAINT medicine_prescription_fk FOREIGN KEY ( prescription_prescription_id )
+        REFERENCES prescription ( prescription_id )';
+    dbms_output.put_line('FK Constarints for medicine.');
+    EXECUTE IMMEDIATE 'ALTER TABLE prescription
+    ADD CONSTRAINT prescription_patient_fk FOREIGN KEY ( patient_patient_id )
+        REFERENCES patient ( patient_id )';
+    dbms_output.put_line('FK Constarints for prescription.');
+    EXECUTE IMMEDIATE 'ALTER TABLE patient
+    ADD CONSTRAINT patient_person_fk FOREIGN KEY ( person_person_id )
+        REFERENCES person ( person_id )';
+    dbms_output.put_line('FK Constarints for patient.');
+    EXECUTE IMMEDIATE 'ALTER TABLE donor
+    ADD CONSTRAINT donor_person_fk FOREIGN KEY ( person_person_id )
+        REFERENCES person ( person_id )';
+    dbms_output.put_line('FK Constarints for donor.');
+    EXECUTE IMMEDIATE 'ALTER TABLE contact_details
+    ADD CONSTRAINT contact_details_person_fk FOREIGN KEY ( person_person_id )
+        REFERENCES person ( person_id )';
+    dbms_output.put_line('FK Constarints for contact_details.');
+    EXECUTE IMMEDIATE 'ALTER TABLE shift_nurse
+    ADD CONSTRAINT shift_nurse_nurse_fk FOREIGN KEY ( nurse_nurse_id )
+        REFERENCES nurse ( nurse_id )';
+    dbms_output.put_line('FK Constarints for shift_nurse.');
+    EXECUTE IMMEDIATE 'ALTER TABLE nurse
+    ADD CONSTRAINT nurse_department_fk FOREIGN KEY ( department_dept_id )
+        REFERENCES department ( dept_id )';
+    EXECUTE IMMEDIATE 'ALTER TABLE nurse
+    ADD CONSTRAINT nurse_person_fk FOREIGN KEY ( person_person_id )
+        REFERENCES person ( person_id )';
+    dbms_output.put_line('FK Constarints for nurse.');   
+    EXECUTE IMMEDIATE 'ALTER TABLE doctor
+    ADD CONSTRAINT doctor_department_fk FOREIGN KEY ( department_dept_id )
+        REFERENCES department ( dept_id )';
+    EXECUTE IMMEDIATE 'ALTER TABLE doctor
+    ADD CONSTRAINT doctor_person_fk FOREIGN KEY ( person_person_id )
+        REFERENCES person ( person_id )';
+    dbms_output.put_line('FK Constarints for doctor.');
 END;
