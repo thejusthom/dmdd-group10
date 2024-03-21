@@ -1,4 +1,4 @@
-### Hospital Management System Readme
+### Hospital Management System
 
 This Hospital Management System (HMS) facilitates the management of various aspects within a hospital environment, including appointments, patient records, blood donations, and staff management. Below are the steps to set up and use the system:
 
