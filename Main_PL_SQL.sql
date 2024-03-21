@@ -32,13 +32,13 @@ BEGIN
         CONSTRAINT appointment_pk PRIMARY KEY (appointment_id))';
     dbms_output.put_line('Table appointment created.');
     EXECUTE IMMEDIATE 'CREATE TABLE donor_blood_camp_asso (
-    donor_blood              NUMBER NOT NULL,
+    donor_blood_id              NUMBER NOT NULL,
     blood_camp_blood_camp_id NUMBER NOT NULL,
     donor_donor_id           NUMBER NOT NULL,
     donated_date             DATE,
     expiry_date              DATE,
     isbloodconsumed          CHAR(1),
-    CONSTRAINT donor_blood_camp_asso_pk PRIMARY KEY (donor_donor_id, donor_blood))';
+    CONSTRAINT donor_blood_camp_asso_pk PRIMARY KEY (donor_blood_id))';
     dbms_output.put_line('Table donor_blood_camp_asso created.');
     EXECUTE IMMEDIATE 'CREATE TABLE blood_requirement (
     requirement_id               NUMBER NOT NULL,
@@ -137,4 +137,44 @@ BEGIN
     hod       VARCHAR2(200),
     CONSTRAINT department_pk PRIMARY KEY ( dept_id ))';
     dbms_output.put_line('Table department created.');
+    EXECUTE IMMEDIATE 'CREATE TABLE person (
+    person_id   NUMBER NOT NULL,
+    first_name  VARCHAR2(50),
+    last_name   VARCHAR2(50),
+    dob         DATE,
+    blood_group VARCHAR2(10),
+    gender      VARCHAR2(10),
+    CONSTRAINT person_pk PRIMARY KEY ( person_id ))';
+    dbms_output.put_line('Table person created.');
+    
+    -- Adding Foreign Key Constraints
+    EXECUTE IMMEDIATE 'ALTER TABLE appointment
+    ADD CONSTRAINT appointment_doctor_fk FOREIGN KEY ( doctor_doctor_id )
+        REFERENCES doctor ( doctor_id )';
+    EXECUTE IMMEDIATE 'ALTER TABLE appointment
+    ADD CONSTRAINT appointment_patient_fk FOREIGN KEY ( patient_patient_id )
+        REFERENCES patient ( patient_id )';
+    dbms_output.put_line('FK Constarints for appointment.');
+    EXECUTE IMMEDIATE 'ALTER TABLE donor_blood_camp_asso
+    ADD CONSTRAINT donor_blood_camp_fk FOREIGN KEY ( blood_camp_blood_camp_id )
+        REFERENCES blood_camp ( blood_camp_id )';
+    EXECUTE IMMEDIATE 'ALTER TABLE donor_blood_camp_asso
+    ADD CONSTRAINT donor_blood_camp_asso_donor_fk FOREIGN KEY ( donor_donor_id )
+        REFERENCES donor ( donor_id )';
+    dbms_output.put_line('FK Constarints for donor_blood_camp_asso.');
+    EXECUTE IMMEDIATE 'ALTER TABLE blood_requirement
+    ADD CONSTRAINT blood_req_blood_camp_fk FOREIGN KEY ( blood_camp_blood_camp_id )
+        REFERENCES blood_camp ( blood_camp_id )';
+    EXECUTE IMMEDIATE 'ALTER TABLE blood_requirement
+    ADD CONSTRAINT blood_req_prescription_fk FOREIGN KEY ( prescription_prescription_id )
+        REFERENCES prescription ( prescription_id )';
+    dbms_output.put_line('FK Constarints for blood_requirement.');
+    EXECUTE IMMEDIATE 'ALTER TABLE out_patient
+    ADD CONSTRAINT out_patient_patient_fk FOREIGN KEY ( patient_patient_id )
+        REFERENCES patient ( patient_id )';
+    dbms_output.put_line('FK Constarints for out_patient.');
+    EXECUTE IMMEDIATE 'ALTER TABLE health_report
+    ADD CONSTRAINT health_report_patient_fk FOREIGN KEY ( patient_patient_id )
+        REFERENCES patient ( patient_id )';
+    dbms_output.put_line('FK Constarints for health_report.');
 END;
