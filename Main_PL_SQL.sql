@@ -56,4 +56,10 @@ BEGIN
     end_date      DATE,
     CONSTRAINT blood_camp_pk PRIMARY KEY ( blood_camp_id ))';
     dbms_output.put_line('Table blood_camp created.');
+    EXECUTE IMMEDIATE 'CREATE TABLE out_patient (
+    visit_date         DATE,
+    patient_patient_id NUMBER NOT NULL,
+    consultation_fee   NUMBER,
+    CONSTRAINT out_patient_pk PRIMARY KEY ( patient_patient_id ))';
+    dbms_output.put_line('Table out_patient created.');
 END;
