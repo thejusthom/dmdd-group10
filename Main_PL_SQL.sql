@@ -102,4 +102,13 @@ BEGIN
     person_person_id  NUMBER NOT NULL,
     CONSTRAINT donor_pk PRIMARY KEY ( donor_id ))';
     dbms_output.put_line('Table donor created.');
+    EXECUTE IMMEDIATE 'CREATE TABLE contact_details (
+    phone_number     NUMBER,
+    email_id         VARCHAR2(100),
+    address          VARCHAR2(200),
+    person_person_id NUMBER NOT NULL)';
+    dbms_output.put_line('Table contact_details created.');
+    EXECUTE IMMEDIATE 'CREATE UNIQUE INDEX contact_details__idx ON contact_details (
+    person_person_id ASC)';
+    dbms_output.put_line('Unique Index contact_details__idx created.');
 END;
