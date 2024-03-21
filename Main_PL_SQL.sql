@@ -117,5 +117,24 @@ BEGIN
     start_time     DATE,
     end_time       DATE,
     CONSTRAINT shift_nurse_pk PRIMARY KEY ( shift_id ))';
-    dbms_output.put_line('Table shift_nurse created.');
+    dbms_output.put_line('Table shift_nurse created.');  
+    EXECUTE IMMEDIATE 'CREATE TABLE nurse (
+    nurse_id            NUMBER NOT NULL,
+    deptartment_dept_id NUMBER NOT NULL,
+    person_person_id    NUMBER NOT NULL,
+    CONSTRAINT nurse_pk PRIMARY KEY ( nurse_id ))';
+    dbms_output.put_line('Table nurse created.');
+    EXECUTE IMMEDIATE 'CREATE TABLE doctor (
+    doctor_id           NUMBER NOT NULL,
+    specialization      VARCHAR2(50),
+    person_person_id    NUMBER NOT NULL,
+    deptartment_dept_id NUMBER NOT NULL,
+    CONSTRAINT doctor_pk PRIMARY KEY ( doctor_id ))';
+    dbms_output.put_line('Table doctor created.');
+    EXECUTE IMMEDIATE 'CREATE TABLE department (
+    dept_id   NUMBER NOT NULL,
+    dept_name VARCHAR2(100),
+    hod       VARCHAR2(200),
+    CONSTRAINT department_pk PRIMARY KEY ( dept_id ))';
+    dbms_output.put_line('Table department created.');
 END;
