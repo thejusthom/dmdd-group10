@@ -96,4 +96,10 @@ BEGIN
     person_person_id NUMBER NOT NULL,
     CONSTRAINT patient_pk PRIMARY KEY ( patient_id ))';
     dbms_output.put_line('Table patient created.');
+    EXECUTE IMMEDIATE 'CREATE TABLE donor (
+    donor_id          NUMBER NOT NULL,
+    registration_date DATE,
+    person_person_id  NUMBER NOT NULL,
+    CONSTRAINT donor_pk PRIMARY KEY ( donor_id ))';
+    dbms_output.put_line('Table donor created.');
 END;
