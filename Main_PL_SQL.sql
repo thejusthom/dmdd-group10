@@ -72,4 +72,11 @@ BEGIN
     patient_patient_id NUMBER NOT NULL,
     CONSTRAINT health_report_pk PRIMARY KEY ( report_id ))';
     dbms_output.put_line('Table health_report created.');
+    EXECUTE IMMEDIATE 'CREATE TABLE in_patient (
+    admission_date     DATE,
+    discharge_date     DATE,
+    room_no            NUMBER,
+    patient_patient_id NUMBER NOT NULL,
+    CONSTRAINT in_patient_pk PRIMARY KEY ( patient_patient_id ))';
+    dbms_output.put_line('Table in_patient created.');
 END;
