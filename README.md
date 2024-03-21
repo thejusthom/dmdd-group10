@@ -11,8 +11,6 @@ This Hospital Management System (HMS) facilitates the management of various aspe
 3. **Execute create_app_admin.sql**: This script creates the admin user and assign permissions.
 
 4. **Login as Admin_User**:
-   - **Username**: ADMIN_USER
-   - **Password**: passAdmin2024#
    Logging in as the admin user provides administrative privileges for further setup and management.
 
 5. **Execute check_table.sql**: Creates a function that checks if the required tables exist in the database.
