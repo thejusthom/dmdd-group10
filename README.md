@@ -8,22 +8,24 @@ This Hospital Management System (HMS) facilitates the management of various aspe
 
 2. **Execute drop_user.sql**: Creates a function that drops any existing users related to the HMS system.
 
-3. **Execute User_Creation_Scripts_Project3.sql**: This script creates the necessary roles and users for the HMS system.
+3. **Execute create_app_admin.sql**: This script creates the admin user and assign permissions.
 
-4. **Login as Admin_User**:
+4. **Execute User_Creation_Scripts_Project3.sql**: This script creates the necessary roles and users for the HMS system.
+
+5. **Login as Admin_User**:
    - **Username**: ADMIN_USER
    - **Password**: passAdmin2024#
    Logging in as the admin user provides administrative privileges for further setup and management.
 
-5. **Execute check_table.sql**: Creates a function that checks if the required tables exist in the database.
+6. **Execute check_table.sql**: Creates a function that checks if the required tables exist in the database.
 
-6. **Execute drop_table.sql**: Creates a function that drops any existing tables related to the HMS system.
+7. **Execute drop_table.sql**: Creates a function that drops any existing tables related to the HMS system.
 
-7. **Execute Main_PL_SQL.sql**: This script contains the main PL/SQL code for the HMS system, including procedures.
+8. **Execute Main_PL_SQL.sql**: This script contains the main PL/SQL code for the HMS system, including procedures.
 
-8. **Execute views.sql**: This script creates views for easier data retrieval and analysis.
+9. **Execute views.sql**: This script creates views for easier data retrieval and analysis.
 
-9. **Execute sample_data.sql**: This script populates the tables with sample data for testing and demonstration purposes.
+10. **Execute sample_data.sql**: This script populates the tables with sample data for testing and demonstration purposes.
 
 #### Available Tables:
 
