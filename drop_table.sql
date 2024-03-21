@@ -10,15 +10,12 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Table name is: ' || tab_name);
     DBMS_OUTPUT.PUT_LINE(v_table_exists);
     IF v_table_exists = 1 THEN
-        DBMS_OUTPUT.PUT_LINE('INSIDE IF, THEN');
         IF (v_constraint_exists != 0) THEN
             FOR c IN (SELECT CONSTRAINT_NAME FROM USER_CONSTRAINTS WHERE TABLE_NAME = tab_name) LOOP
-                DBMS_OUTPUT.PUT_LINE('LOOPING');
                 EXECUTE IMMEDIATE 'ALTER TABLE ' || tab_name || ' DROP CONSTRAINT ' || c.CONSTRAINT_NAME;
                 DBMS_OUTPUT.PUT_LINE('Constraint ' || c.CONSTRAINT_NAME || ' dropped.');
             END LOOP;
         END IF;
-        DBMS_OUTPUT.PUT_LINE('Constrai ');
     EXECUTE IMMEDIATE 'DROP TABLE ' || tab_name;
     END IF;
     RETURN 1;
