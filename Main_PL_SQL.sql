@@ -111,4 +111,11 @@ BEGIN
     EXECUTE IMMEDIATE 'CREATE UNIQUE INDEX contact_details__idx ON contact_details (
     person_person_id ASC)';
     dbms_output.put_line('Unique Index contact_details__idx created.');
+    EXECUTE IMMEDIATE 'CREATE TABLE shift_nurse (
+    shift_id       NUMBER NOT NULL,
+    nurse_nurse_id NUMBER NOT NULL,
+    start_time     DATE,
+    end_time       DATE,
+    CONSTRAINT shift_nurse_pk PRIMARY KEY ( shift_id ))';
+    dbms_output.put_line('Table shift_nurse created.');
 END;
