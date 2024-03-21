@@ -79,4 +79,11 @@ BEGIN
     patient_patient_id NUMBER NOT NULL,
     CONSTRAINT in_patient_pk PRIMARY KEY ( patient_patient_id ))';
     dbms_output.put_line('Table in_patient created.');
+    EXECUTE IMMEDIATE 'CREATE TABLE medicine (
+    medicine_id                  NUMBER NOT NULL,
+    dosage                       VARCHAR2(20),
+    quantity                     NUMBER,
+    prescription_prescription_id NUMBER NOT NULL,
+    CONSTRAINT medicine_pk PRIMARY KEY ( medicine_id ))';
+    dbms_output.put_line('Table medicine created.');
 END;
