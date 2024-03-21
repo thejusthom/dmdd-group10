@@ -4,14 +4,14 @@ This Hospital Management System (HMS) facilitates the management of various aspe
 
 #### Setup Steps:
 
-1. **Execute drop_role.sql**: Creates a function that drops any existing roles related to the HMS system.
+1. **Execute create_app_admin.sql**: This script creates the admin user and assign permissions.
 
-2. **Execute drop_user.sql**: Creates a function that drops any existing users related to the HMS system.
-
-3. **Execute create_app_admin.sql**: This script creates the admin user and assign permissions.
-
-4. **Login as Admin_User**:
+2. **Login as Admin_User**:
    Logging in as the admin user provides administrative privileges for further setup and management.
+   
+3. **Execute drop_role.sql**: Creates a function that drops any existing roles related to the HMS system.
+
+4. **Execute drop_user.sql**: Creates a function that drops any existing users related to the HMS system.
 
 5. **Execute check_table.sql**: Creates a function that checks if the required tables exist in the database.
 
