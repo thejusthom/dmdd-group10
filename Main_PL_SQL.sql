@@ -62,4 +62,14 @@ BEGIN
     consultation_fee   NUMBER,
     CONSTRAINT out_patient_pk PRIMARY KEY ( patient_patient_id ))';
     dbms_output.put_line('Table out_patient created.');
+    EXECUTE IMMEDIATE 'CREATE TABLE health_report (
+    report_id          NUMBER NOT NULL,
+    bp                 NUMBER,
+    pulse              NUMBER,
+    weight             NUMBER,
+    height             NUMBER,
+    general_condition  VARCHAR2(50),
+    patient_patient_id NUMBER NOT NULL,
+    CONSTRAINT health_report_pk PRIMARY KEY ( report_id ))';
+    dbms_output.put_line('Table health_report created.');
 END;
