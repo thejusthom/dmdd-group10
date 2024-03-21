@@ -219,4 +219,13 @@ BEGIN
     ADD CONSTRAINT doctor_person_fk FOREIGN KEY ( person_person_id )
         REFERENCES person ( person_id )';
     dbms_output.put_line('FK Constarints for doctor.');
+    EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('Table data not found');
+    WHEN DUP_VAL_ON_INDEX THEN
+        DBMS_OUTPUT.PUT_LINE('Table data already exists');
+    WHEN PROGRAM_ERROR THEN
+        DBMS_OUTPUT.PUT_LINE('PL/SQL has an internal problem');
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('EXCEPTION REACHED');
 END;

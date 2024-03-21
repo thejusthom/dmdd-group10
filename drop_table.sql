@@ -16,11 +16,17 @@ BEGIN
                 DBMS_OUTPUT.PUT_LINE('Constraint ' || c.CONSTRAINT_NAME || ' dropped.');
             END LOOP;
         END IF;
-    EXECUTE IMMEDIATE 'DROP TABLE ' || tab_name;
     END IF;
+    EXECUTE IMMEDIATE 'DROP TABLE ' || tab_name;
     RETURN 1;
 EXCEPTION
+      WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('Table data not found');
+        RETURN 0;
+    WHEN DUP_VAL_ON_INDEX THEN
+        DBMS_OUTPUT.PUT_LINE('Table data already exists');
+        RETURN 0;
     WHEN OTHERS THEN
-    DBMS_OUTPUT.PUT_LINE('EXCEPTION REACHED');
+        DBMS_OUTPUT.PUT_LINE('EXCEPTION REACHED');
         RETURN 0;
 END drop_table;

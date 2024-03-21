@@ -331,6 +331,9 @@ BEGIN
     COMMIT;
 
 EXCEPTION
+    WHEN DUP_VAL_ON_INDEX THEN
+        DBMS_OUTPUT.PUT_LINE('Duplicate values cannot be stored in a unique column');
+        ROLLBACK;
     WHEN OTHERS THEN
         v_error_code := SQLCODE;
         v_error_msg := SUBSTR(SQLERRM, 1, 4000);

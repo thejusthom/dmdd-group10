@@ -48,6 +48,8 @@ BEGIN
         GROUP BY donor.donor_id, person.first_name, person.last_name
         ORDER BY donation_count DESC';
 EXCEPTION
+     WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('No Rows Returned for SELECT INTO Statement');
     WHEN OTHERS THEN
       DBMS_OUTPUT.PUT_LINE('EXCEPTION REACHED');
 END;
