@@ -49,4 +49,11 @@ BEGIN
     prescription_prescription_id NUMBER NOT NULL,
     CONSTRAINT blood_requirement_pk PRIMARY KEY (requirement_id, blood_camp_blood_camp_id))';
     dbms_output.put_line('Table blood_requirement created.');
+    EXECUTE IMMEDIATE 'CREATE TABLE blood_camp (
+    blood_camp_id NUMBER NOT NULL,
+    address       VARCHAR2(100),
+    start_date    DATE,
+    end_date      DATE,
+    CONSTRAINT blood_camp_pk PRIMARY KEY ( blood_camp_id ))';
+    dbms_output.put_line('Table blood_camp created.');
 END;
