@@ -4,6 +4,8 @@ DECLARE
   -- Function to drop user and return 1 if dropped successfully or 0 if an exception occurs
   v_user_exists NUMBER;
   v_role_exists NUMBER;
+  v_error_code NUMBER;
+  v_error_msg VARCHAR2(4000);
 BEGIN
   -- Drop users if they already exist
   v_user_exists := drop_user('DOCTOR_USER');
@@ -73,5 +75,10 @@ BEGIN
   EXECUTE IMMEDIATE 'GRANT PATIENT_ROLE TO PATIENT_USER';
   EXECUTE IMMEDIATE 'GRANT DONOR_ROLE TO DONOR_USER';
   DBMS_OUTPUT.PUT_LINE('Assigned roles to users');
+EXCEPTION
+    WHEN OTHERS THEN
+        v_error_code := SQLCODE;
+        v_error_msg := SUBSTR(SQLERRM, 1, 4000);
+        DBMS_OUTPUT.PUT_LINE('Error Code: ' || v_error_code || ', Error Message: ' || v_error_msg);
 END;
 /

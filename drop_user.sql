@@ -11,4 +11,3 @@ BEGIN
   END;
 END drop_user;
 /
-
