@@ -71,4 +71,44 @@ SELECT * FROM person;
 
 These queries will provide insights into the sample data populated in each table.
 
+### Views
+
+The Hospital Management System (HMS) utilizes various views to simplify data retrieval and analysis. Below are the views created in the system:
+
+#### 1. Doctor Information View
+- **Name**: `doctor_information_view`
+- **Purpose**: Provides comprehensive information about doctors including their specialization, department, personal details such as name, date of birth, blood group, and gender.
+- **Tables Involved**: `doctor`, `department`, `person`
+- **Columns**: doctor_id, specialization, dept_name, first_name, last_name, dob, blood_group, gender
+
+#### 2. Patient Information View
+- **Name**: `patient_information_view`
+- **Purpose**: Presents essential details about patients such as their ID, name, date of birth, blood group, and gender.
+- **Tables Involved**: `patient`, `person`
+- **Columns**: patient_id, first_name, last_name, date_of_birth, blood_group, gender
+
+#### 3. Appointment Information View
+- **Name**: `appointment_information_view`
+- **Purpose**: Offers insights into appointments by displaying appointment IDs, dates, types, and the corresponding doctor and patient IDs.
+- **Tables Involved**: `appointment`, `doctor`, `patient`
+- **Columns**: appointment_id, appointment_date, appointment_type, doctor_id, patient_id
+
+#### 4. Blood Inventory View
+- **Name**: `blood_inventory_view`
+- **Purpose**: Provides a count of available blood units for each blood group, considering factors such as expiry date and usage status.
+- **Tables Involved**: `donor_blood_camp_asso`, `donor`, `person`
+- **Columns**: blood_count, blood_group
+
+#### 5. Doctor Appointment View
+- **Name**: `doctor_appointment_view`
+- **Purpose**: Lists appointments scheduled for the current date, along with details of the patient, doctor, and appointment.
+- **Tables Involved**: `appointment`, `doctor`, `patient`, `person`
+- **Columns**: appointment_id, appointment_date, appointment_type, patient_id, first_name, last_name, doctor_id
+
+#### 6. Top Blood Donors View
+- **Name**: `top_blood_donors_view`
+- **Purpose**: Identifies the top blood donors based on the count of donations made, displaying their IDs, names, and donation counts.
+- **Tables Involved**: `donor`, `donor_blood_camp_asso`, `person`
+- **Columns**: donor_id, first_name, last_name, donation_count
+
 The Hospital Management System is now set up and ready for use.
