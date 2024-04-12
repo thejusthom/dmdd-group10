@@ -1,27 +1,23 @@
 CREATE OR REPLACE PROCEDURE create_sequences AS
-	v_sequence_exists NUMBER
 BEGIN
-	v_sequence_exists := drop_sequence('appointment_id_seq');
-	v_sequence_exists := drop_sequence('donor_blood_id_seq');
-	v_sequence_exists := drop_sequence('requirement_id_seq');
-	v_sequence_exists := drop_sequence('out_patient_seq');
-	v_sequence_exists := drop_sequence('report_id_seq');
-	v_sequence_exists := drop_sequence('in_patient_seq');
-	v_sequence_exists := drop_sequence('medicine_id_seq');
-	v_sequence_exists := drop_sequence('prescription_id_seq');
-	v_sequence_exists := drop_sequence('patient_id_seq');
-	v_sequence_exists := drop_sequence('donor_id_seq');
-	v_sequence_exists := drop_sequence('shift_id_seq');
-	v_sequence_exists := drop_sequence('nurse_id_seq');
-	v_sequence_exists := drop_sequence('doctor_id_seq');
-	v_sequence_exists := drop_sequence('person_id_seq');
+	 drop_sequence('appointment_id_seq');
+	 drop_sequence('donor_blood_id_seq');
+	 drop_sequence('requirement_id_seq');
+	 drop_sequence('out_patient_seq');
+	 drop_sequence('report_id_seq');
+	 drop_sequence('in_patient_seq');
+	 drop_sequence('medicine_id_seq');
+	 drop_sequence('prescription_id_seq');
+	 drop_sequence('patient_id_seq');
+	 drop_sequence('donor_id_seq');
+	 drop_sequence('shift_id_seq');
+	 drop_sequence('nurse_id_seq');
+	 drop_sequence('doctor_id_seq');
+	 drop_sequence('person_id_seq');
 	
-	
-    -- Create appointment_id_seq sequence
-    EXECUTE IMMEDIATE 'CREATE SEQUENCE appointment_id_seq START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE';
+	EXECUTE IMMEDIATE 'CREATE SEQUENCE appointment_id_seq START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE';
     DBMS_OUTPUT.PUT_LINE('Sequence appointment_id_seq created.');
-
-    -- Create donor_blood_id_seq sequence
+    
     EXECUTE IMMEDIATE 'CREATE SEQUENCE donor_blood_id_seq START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE';
     DBMS_OUTPUT.PUT_LINE('Sequence donor_blood_id_seq created.');
 

@@ -16,13 +16,17 @@ This Hospital Management System (HMS) facilitates the management of various aspe
 
 6. **Execute drop_table.sql**: Creates a function that drops any existing tables related to the HMS system.
 
-7. **Execute Main_PL_SQL.sql**: This script contains the main PL/SQL code for the HMS system, including procedures.
+7. **Execute drop_sequence**: Creates a procedure to drop sequences
 
-8. **Execute views.sql**: This script creates views for easier data retrieval and analysis.
+8. **Execute Main_PL_SQL.sql**: This script contains the main PL/SQL code for the HMS system, including procedures.
 
-9.  **Execute User_Creation_Scripts_Project3.sql**: This script creates the necessary roles and users for the HMS system.
+9.  **Execute views.sql**: This script creates views for easier data retrieval and analysis.
 
-10. **Execute sample_data.sql**: This script populates the tables with sample data for testing and demonstration purposes.
+10. **Execute create_sequences**: Create a sequence to create all sequences
+
+11. **Execute User_Creation_Scripts_Project3.sql**: This script creates the necessary roles and users for the HMS system.
+
+12. **Execute sample_data.sql**: This script populates the tables with sample data for testing and demonstration purposes.
 
 #### Available Tables:
 
