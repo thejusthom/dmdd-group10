@@ -43,7 +43,6 @@ BEGIN
     blood_camp_blood_camp_id NUMBER NOT NULL,
     donor_donor_id           NUMBER NOT NULL,
     donated_date             DATE,
-    expiry_date              DATE,
     isbloodconsumed          CHAR(1),
     CONSTRAINT donor_blood_camp_asso_pk PRIMARY KEY (donor_blood_id))';
     dbms_output.put_line('Table donor_blood_camp_asso created.');
@@ -90,6 +89,7 @@ BEGIN
     medicine_id                  NUMBER NOT NULL,
     dosage                       VARCHAR2(20),
     quantity                     NUMBER,
+    "DOSAGE/DAY"                 VARCHAR2(20) NOT NULL,
     prescription_prescription_id NUMBER NOT NULL,
     CONSTRAINT medicine_pk PRIMARY KEY ( medicine_id ))';
     dbms_output.put_line('Table medicine created.');
@@ -109,32 +109,28 @@ BEGIN
     person_person_id  NUMBER NOT NULL,
     CONSTRAINT donor_pk PRIMARY KEY ( donor_id ))';
     dbms_output.put_line('Table donor created.');
-    EXECUTE IMMEDIATE 'CREATE TABLE contact_details (
-    phone_number     NUMBER,
-    email_id         VARCHAR2(100),
-    address          VARCHAR2(200),
-    person_person_id NUMBER NOT NULL)';
-    dbms_output.put_line('Table contact_details created.');
     EXECUTE IMMEDIATE 'CREATE UNIQUE INDEX contact_details__idx ON contact_details (
     person_person_id ASC)';
     dbms_output.put_line('Unique Index contact_details__idx created.');
     EXECUTE IMMEDIATE 'CREATE TABLE shift_nurse (
     shift_id       NUMBER NOT NULL,
     nurse_nurse_id NUMBER NOT NULL,
-    start_time     DATE,
-    end_time       DATE,
+    shift_timing_shift_timing_id NUMBER NOT NULL,
     CONSTRAINT shift_nurse_pk PRIMARY KEY ( shift_id ))';
     dbms_output.put_line('Table shift_nurse created.');  
     EXECUTE IMMEDIATE 'CREATE TABLE nurse (
     nurse_id            NUMBER NOT NULL,
     department_dept_id NUMBER NOT NULL,
     person_person_id    NUMBER NOT NULL,
+    is_active                 CHAR(1) DEFAULT 'Y' NOT NULL,
     CONSTRAINT nurse_pk PRIMARY KEY ( nurse_id ))';
     dbms_output.put_line('Table nurse created.');
     EXECUTE IMMEDIATE 'CREATE TABLE doctor (
     doctor_id           NUMBER NOT NULL,
     specialization      VARCHAR2(50),
     person_person_id    NUMBER NOT NULL,
+    joining_exp               DATE NOT NULL,
+    is_active                 CHAR(1) NOT NULL,
     department_dept_id NUMBER NOT NULL,
     CONSTRAINT doctor_pk PRIMARY KEY ( doctor_id ))';
     dbms_output.put_line('Table doctor created.');
@@ -151,6 +147,9 @@ BEGIN
     dob         DATE,
     blood_group VARCHAR2(10),
     gender      VARCHAR2(10),
+    email_id     VARCHAR2(200) NOT NULL,
+    phone_number NUMBER NOT NULL,
+    address      VARCHAR2(200) NOT NULL,
     CONSTRAINT person_pk PRIMARY KEY ( person_id ))';
     dbms_output.put_line('Table person created.');
     
