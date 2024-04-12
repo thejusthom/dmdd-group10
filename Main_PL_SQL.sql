@@ -3,6 +3,8 @@ SET SERVEROUTPUT ON
 DECLARE
     v_table_exists      NUMBER;
     v_constraint_exists NUMBER;
+    v_error_code NUMBER;
+    v_error_msg VARCHAR2(4000);
 BEGIN
     v_table_exists := drop_table('appointment');
     v_table_exists := drop_table('appointment_slot');
@@ -35,6 +37,7 @@ BEGIN
         doctor_doctor_id      NUMBER NOT NULL,
         appointment_type      VARCHAR2(50),
         diagnosis             VARCHAR2(50),
+        fee                   NUMBER 
         appointment_slot_slot_id NUMBER NOT NULL,
         CONSTRAINT appointment_pk PRIMARY KEY (appointment_id))';
     dbms_output.put_line('Table appointment created.');
@@ -43,7 +46,6 @@ BEGIN
     blood_camp_blood_camp_id NUMBER NOT NULL,
     donor_donor_id           NUMBER NOT NULL,
     donated_date             DATE,
-    expiry_date              DATE,
     isbloodconsumed          CHAR(1),
     CONSTRAINT donor_blood_camp_asso_pk PRIMARY KEY (donor_blood_id))';
     dbms_output.put_line('Table donor_blood_camp_asso created.');
@@ -66,14 +68,13 @@ BEGIN
     EXECUTE IMMEDIATE 'CREATE TABLE out_patient (
     visit_date         DATE,
     patient_patient_id NUMBER NOT NULL,
-    consultation_fee   NUMBER,
     CONSTRAINT out_patient_pk PRIMARY KEY ( patient_patient_id ))';
     dbms_output.put_line('Table out_patient created.');
     EXECUTE IMMEDIATE 'CREATE TABLE health_report (
     report_id          NUMBER NOT NULL,
     bp                 NUMBER,
     pulse              NUMBER,
-    weight             NUMBER,
+    weight             NUMBER, 
     height             NUMBER,
     general_condition  VARCHAR2(50),
     patient_patient_id NUMBER NOT NULL,
@@ -90,12 +91,14 @@ BEGIN
     medicine_id                  NUMBER NOT NULL,
     dosage                       VARCHAR2(20),
     quantity                     NUMBER,
+    "DOSAGE/DAY"                 VARCHAR2(20) NOT NULL,
     prescription_prescription_id NUMBER NOT NULL,
     CONSTRAINT medicine_pk PRIMARY KEY ( medicine_id ))';
     dbms_output.put_line('Table medicine created.');
     EXECUTE IMMEDIATE 'CREATE TABLE prescription (
     prescription_id    NUMBER NOT NULL,
     patient_patient_id NUMBER NOT NULL,
+    prescription_date   DATE,
     CONSTRAINT prescription_pk PRIMARY KEY ( prescription_id ))';
     dbms_output.put_line('Table prescription created.');
     EXECUTE IMMEDIATE 'CREATE TABLE patient (
@@ -109,32 +112,25 @@ BEGIN
     person_person_id  NUMBER NOT NULL,
     CONSTRAINT donor_pk PRIMARY KEY ( donor_id ))';
     dbms_output.put_line('Table donor created.');
-    EXECUTE IMMEDIATE 'CREATE TABLE contact_details (
-    phone_number     NUMBER,
-    email_id         VARCHAR2(100),
-    address          VARCHAR2(200),
-    person_person_id NUMBER NOT NULL)';
-    dbms_output.put_line('Table contact_details created.');
-    EXECUTE IMMEDIATE 'CREATE UNIQUE INDEX contact_details__idx ON contact_details (
-    person_person_id ASC)';
-    dbms_output.put_line('Unique Index contact_details__idx created.');
     EXECUTE IMMEDIATE 'CREATE TABLE shift_nurse (
     shift_id       NUMBER NOT NULL,
     nurse_nurse_id NUMBER NOT NULL,
-    start_time     DATE,
-    end_time       DATE,
+    shift_timing_shift_timing_id NUMBER NOT NULL,
     CONSTRAINT shift_nurse_pk PRIMARY KEY ( shift_id ))';
     dbms_output.put_line('Table shift_nurse created.');  
     EXECUTE IMMEDIATE 'CREATE TABLE nurse (
     nurse_id            NUMBER NOT NULL,
     department_dept_id NUMBER NOT NULL,
     person_person_id    NUMBER NOT NULL,
+    is_active                 CHAR(1) DEFAULT ''Y'' NOT NULL,
     CONSTRAINT nurse_pk PRIMARY KEY ( nurse_id ))';
     dbms_output.put_line('Table nurse created.');
     EXECUTE IMMEDIATE 'CREATE TABLE doctor (
     doctor_id           NUMBER NOT NULL,
     specialization      VARCHAR2(50),
     person_person_id    NUMBER NOT NULL,
+    joining_exp               DATE NOT NULL,
+    is_active                 CHAR(1) DEFAULT ''Y'' NOT NULL,
     department_dept_id NUMBER NOT NULL,
     CONSTRAINT doctor_pk PRIMARY KEY ( doctor_id ))';
     dbms_output.put_line('Table doctor created.');
@@ -151,6 +147,10 @@ BEGIN
     dob         DATE,
     blood_group VARCHAR2(10),
     gender      VARCHAR2(10),
+    email_id     VARCHAR2(200) NOT NULL,
+    phone_number NUMBER NOT NULL,
+    address      VARCHAR2(200) NOT NULL,
+    created_date Date,
     CONSTRAINT person_pk PRIMARY KEY ( person_id ))';
     dbms_output.put_line('Table person created.');
     
@@ -207,10 +207,6 @@ BEGIN
     ADD CONSTRAINT donor_person_fk FOREIGN KEY ( person_person_id )
         REFERENCES person ( person_id )';
     dbms_output.put_line('FK Constraints for donor.');
-    EXECUTE IMMEDIATE 'ALTER TABLE contact_details
-    ADD CONSTRAINT contact_details_person_fk FOREIGN KEY ( person_person_id )
-        REFERENCES person ( person_id )';
-    dbms_output.put_line('FK Constraints for contact_details.');
     EXECUTE IMMEDIATE 'ALTER TABLE shift_nurse
     ADD CONSTRAINT shift_nurse_nurse_fk FOREIGN KEY ( nurse_nurse_id )
         REFERENCES nurse ( nurse_id )';
@@ -237,5 +233,7 @@ BEGIN
     WHEN PROGRAM_ERROR THEN
         DBMS_OUTPUT.PUT_LINE('PL/SQL has an internal problem');
     WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('EXCEPTION REACHED');
+        v_error_code := SQLCODE;
+        v_error_msg := SUBSTR(SQLERRM, 1, 4000);
+        DBMS_OUTPUT.PUT_LINE('Error Code: ' || v_error_code || ', Error Message: ' || v_error_msg);
 END;
