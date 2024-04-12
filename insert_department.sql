@@ -10,9 +10,9 @@ BEGIN
     
     COMMIT;
     
-    DBMS_OUTPUT.PUT_LINE('Values inserted successfully.');
+    DBMS_OUTPUT.PUT_LINE('Department values inserted successfully.');
 EXCEPTION
     WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error: ' || SQLERRM);
+        DBMS_OUTPUT.PUT_LINE('Error inserting values into department: ' || SQLERRM);
 END insert_department;
 /
