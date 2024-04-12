@@ -90,6 +90,7 @@ BEGIN
     EXECUTE IMMEDIATE 'CREATE TABLE medicine (
     medicine_id                  NUMBER NOT NULL,
     quantity                     NUMBER,
+    duration                     NUMBER,
     dosage_per_day                 VARCHAR2(20) NOT NULL,
     prescription_prescription_id NUMBER NOT NULL,
     CONSTRAINT medicine_pk PRIMARY KEY ( medicine_id ))';

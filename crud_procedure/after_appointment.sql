@@ -5,22 +5,26 @@ CREATE OR REPLACE PROCEDURE complete_appointment (
     p_weight IN health_report.weight%TYPE,
     p_height IN health_report.height%TYPE,
     p_general_condition IN health_report.general_condition%TYPE,
-    p_consultation_fee IN appointment.consultation_fee%TYPE,
-    p_prescription_date IN prescription.date%TYPE,
+    p_fee IN appointment.fee%TYPE,
+    p_prescription_date IN prescription.prescription_date%TYPE,
     p_medicine_duration IN medicine.duration%TYPE,
     p_medicine_dosage_per_day IN medicine.dosage_per_day%TYPE,
     p_medicine_quantity IN medicine.quantity%TYPE,
     p_email_id IN person.email_id%TYPE,
     p_blood_group IN blood_requirement.blood_group%TYPE,
-    p_blood_quantity IN blood_requirement.blood_quantity%TYPE,
+    p_blood_quantity IN blood_requirement.quantity_required%TYPE,
     p_blood_camp_id IN blood_camp.blood_camp_id%TYPE
 ) AS
-    v_health_report_id   health_report.health_report_id%TYPE;
+    v_health_report_id   health_report.report_id%TYPE;
     v_prescription_id    prescription.prescription_id%TYPE;
     v_medicine_id        medicine.medicine_id%TYPE;
     v_blood_requirement_id blood_requirement.requirement_id%TYPE;
     v_patient_id         patient.patient_id%TYPE;
     v_count              NUMBER;
+    blood_camp_error     EXCEPTION;
+    patient_email_error  EXCEPTION;
+    appointment_id_error EXCEPTION;
+
 BEGIN
     -- Check if the appointment_id exists
     SELECT COUNT(*)
@@ -55,22 +59,22 @@ BEGIN
 
     -- Update appointment status to 'completed'
     UPDATE appointment
-    SET status = 'completed'
+    SET status = 'completed', fee = p_fee
     WHERE appointment_id = p_appointment_id;
 
     -- Insert health report
-    INSERT INTO health_report (health_report_id, bp, pulse, weight, height, general_condition, patient_patient_id)
-    VALUES (health_report_seq.NEXTVAL, p_bp, p_pulse, p_weight, p_height, p_general_condition, v_patient_id)
-    RETURNING health_report_id INTO v_health_report_id;
+    INSERT INTO health_report (report_id, bp, pulse, weight, height, general_condition, patient_patient_id)
+    VALUES (report_id_seq.NEXTVAL, p_bp, p_pulse, p_weight, p_height, p_general_condition, v_patient_id)
+    RETURNING report_id INTO v_health_report_id;
 
     -- Insert prescription
     INSERT INTO prescription (prescription_id, patient_patient_id, prescription_date)
-    VALUES (prescription_seq.NEXTVAL, p_patient_id, p_prescription_date)
+    VALUES (prescription_id_seq.NEXTVAL, p_patient_id, p_prescription_date)
     RETURNING prescription_id INTO v_prescription_id;
 
     -- Insert medicine
     INSERT INTO medicine (medicine_id, duration, dosage_per_day, quantity, prescription_prescription_id)
-    VALUES (medicine_seq.NEXTVAL, p_medicine_duration, p_medicine_dosage_per_day, p_medicine_quantity, v_prescription_id)
+    VALUES (medicine_id_seq.NEXTVAL, p_medicine_duration, p_medicine_dosage_per_day, p_medicine_quantity, v_prescription_id)
     RETURNING medicine_id INTO v_medicine_id;
 
     -- Insert blood requirement if applicable
