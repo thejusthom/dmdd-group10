@@ -14,8 +14,8 @@ BEGIN
         
     ELSIF p_operation = 'UPDATE' THEN
         UPDATE department
-        SET dept_name = p_dept_name,
-            hod = p_hod
+        SET dept_name = COALESCE(p_dept_name, dept_name),
+            hod = COALESCE(p_hod, hod)
         WHERE dept_id = p_dept_id;
         COMMIT;
         DBMS_OUTPUT.PUT_LINE('Department updated successfully.');
