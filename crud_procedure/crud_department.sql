@@ -18,7 +18,7 @@ BEGIN
             hod = COALESCE(p_hod, hod)
         WHERE dept_id = p_dept_id;
         COMMIT;
-        DBMS_OUTPUT.PUT_LINE('Department updated successfully.');
+        -- DBMS_OUTPUT.PUT_LINE('Department updated successfully.');
         
     ELSIF p_operation = 'DELETE' THEN
         DELETE FROM department
