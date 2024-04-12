@@ -1,13 +1,11 @@
-CREATE OR REPLACE TRIGGER blood_requirement_update AFTER
+CREATE OR REPLACE TRIGGER blood_requirement_update BEFORE
     INSERT ON blood_requirement
     FOR EACH ROW
 DECLARE
     v_available_blood NUMBER;
     v_expiry_date     DATE;
     blood_error EXCEPTION;
-    pragma autonomous_transaction;
 BEGIN
-
     -- Check available blood for the specified blood group and not consumed
     SELECT
         COUNT(donor_donor_id)
@@ -43,7 +41,7 @@ BEGIN
         WHEN MATCHED THEN UPDATE
         SET dbca.isbloodconsumed = 'Y';
         dbms_output.put_line(v_available_blood);
-
+        :new.fullfilled := 'Y';     
 
     ELSE
         RAISE blood_error;
@@ -51,7 +49,7 @@ BEGIN
 
 EXCEPTION
     WHEN blood_error THEN
-        dbms_output.put_line('Exception in blood triggers, blood quantity unavailable' || sqlerrm);
+        dbms_output.put_line('Exception in blood triggers, blood quantity unavailable');
     WHEN OTHERS THEN
         dbms_output.put_line('Error: ' || sqlerrm);
 END;
