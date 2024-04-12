@@ -1,10 +1,10 @@
 SET SERVEROUTPUT ON;
 
 BEGIN
-    create_tables;
-    create_views;
-    create_sequences;
-    create_users;
+--    create_tables;
+--    create_views;
+--    create_sequences;
+--    create_users;
 
     --- Adding 5 dept records
     manage_department('INSERT', NULL, 'Cardiology', 1);
@@ -84,11 +84,12 @@ BEGIN
 --    manage_blood_requirement(NULL, 12, 'A-', 'N', 5, 105, 'INSERT');
     
     -- Inserting records for donor blood camp association
-    manage_donor_blood_camp_asso(NULL, 1, 1, 'INSERT');
-    manage_donor_blood_camp_asso(NULL, 2, 2, 'INSERT');
-    manage_donor_blood_camp_asso(NULL, 3, 3, 'INSERT');
-    manage_donor_blood_camp_asso(NULL, 4, 4, 'INSERT');
-    manage_donor_blood_camp_asso(NULL, 5, 5, 'INSERT');
+   manage_donor_blood_camp_asso(NULL, 1, 'john@example.com', 'INSERT');
+   manage_donor_blood_camp_asso(NULL, 2, 'jane@example.com', 'INSERT');
+   manage_donor_blood_camp_asso(NULL, 3, 'sara@example.com', 'INSERT');
+   manage_donor_blood_camp_asso(NULL, 4, 'emily@example.com', 'INSERT');
+   manage_donor_blood_camp_asso(NULL, 5, 'alex@example.com', 'INSERT');
+
 
     
     -- Inserting records for after appointment
