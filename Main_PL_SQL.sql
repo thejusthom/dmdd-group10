@@ -74,7 +74,7 @@ BEGIN
     report_id          NUMBER NOT NULL,
     bp                 NUMBER,
     pulse              NUMBER,
-    weight             NUMBER,
+    weight             NUMBER, 
     height             NUMBER,
     general_condition  VARCHAR2(50),
     patient_patient_id NUMBER NOT NULL,
@@ -98,6 +98,7 @@ BEGIN
     EXECUTE IMMEDIATE 'CREATE TABLE prescription (
     prescription_id    NUMBER NOT NULL,
     patient_patient_id NUMBER NOT NULL,
+    prescription_date   DATE,
     CONSTRAINT prescription_pk PRIMARY KEY ( prescription_id ))';
     dbms_output.put_line('Table prescription created.');
     EXECUTE IMMEDIATE 'CREATE TABLE patient (
@@ -149,6 +150,7 @@ BEGIN
     email_id     VARCHAR2(200) NOT NULL,
     phone_number NUMBER NOT NULL,
     address      VARCHAR2(200) NOT NULL,
+    created_date Date,
     CONSTRAINT person_pk PRIMARY KEY ( person_id ))';
     dbms_output.put_line('Table person created.');
     
