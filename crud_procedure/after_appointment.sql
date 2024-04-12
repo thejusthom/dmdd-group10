@@ -27,15 +27,17 @@ CREATE OR REPLACE PROCEDURE complete_appointment (
 
 BEGIN
     -- Check if the appointment_id exists
+     DBMS_OUTPUT.PUT_LINE('Appointment id is correct');
     SELECT COUNT(*)
     INTO v_count
     FROM appointment
     WHERE appointment_id = p_appointment_id;
+   
 
     IF v_count = 0 THEN
        RAISE appointment_id_error;
     END IF;
-
+    DBMS_OUTPUT.PUT_LINE('Appointment id is correct');
     SELECT patient_id
     INTO v_patient_id
     FROM patient
@@ -44,6 +46,7 @@ BEGIN
     IF v_patient_id IS NULL THEN
         RAISE patient_email_error;
     END IF;
+     DBMS_OUTPUT.PUT_LINE('Patient id is correct');
 
     IF p_blood_camp_id IS NOT NULL THEN
         -- Check if the blood_camp_id is valid
@@ -69,7 +72,7 @@ BEGIN
 
     -- Insert prescription
     INSERT INTO prescription (prescription_id, patient_patient_id, prescription_date)
-    VALUES (prescription_id_seq.NEXTVAL, p_patient_id, p_prescription_date)
+    VALUES (prescription_id_seq.NEXTVAL, v_patient_id, p_prescription_date)
     RETURNING prescription_id INTO v_prescription_id;
 
     -- Insert medicine
@@ -80,7 +83,7 @@ BEGIN
     -- Insert blood requirement if applicable
     IF p_blood_camp_id IS NOT NULL THEN
         INSERT INTO blood_requirement (requirement_id, quantity_required, blood_group, fullfilled, blood_camp_blood_camp_id, prescription_prescription_id)
-        VALUES (blood_requirement_seq.NEXTVAL, p_blood_quantity, p_blood_group, 'N', p_blood_camp_id, v_prescription_id);
+        VALUES (requirement_id_seq.NEXTVAL, p_blood_quantity, p_blood_group, 'N', p_blood_camp_id, v_prescription_id);
     END IF;
 
     COMMIT;

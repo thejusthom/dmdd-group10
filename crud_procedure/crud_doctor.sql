@@ -11,51 +11,56 @@ CREATE OR REPLACE PROCEDURE manage_doctor (
     p_phone_number         IN NUMBER DEFAULT NULL,
     p_address              IN VARCHAR2 DEFAULT NULL,
     p_specialization       IN VARCHAR2 DEFAULT NULL,
-    p_deptartment_id       IN NUMBER DEFAULT NULL,
-    p_joining_exp          IN DATE DEFAULT NULL,
+    p_department_id        IN NUMBER DEFAULT NULL,
+    p_joining_exp          IN NUMBER DEFAULT NULL,
     p_is_active            IN CHAR DEFAULT NULL
 ) AS
     v_person_id     NUMBER;
+    v_doctor_id     NUMBER;
 BEGIN
     -- Insertion
     IF p_to_do = 'insert' THEN
+        -- Get next values from sequences
+        SELECT doctor_id_seq.NEXTVAL, person_id_seq.NEXTVAL INTO v_doctor_id, v_person_id FROM DUAL;
+
         -- Insert into person table
         INSERT INTO person (
+            person_id,
             first_name,
             last_name,
             dob,
             blood_group,
             gender,
-            created_date,
             email_id,
             phone_number,
-            address
+            address,
+            created_date
         ) VALUES (
+            v_person_id,
             p_first_name,
             p_last_name,
             p_dob,
             p_blood_group,
             p_gender,
-            p_created_date,
             p_email_id,
             p_phone_number,
-            p_address
-        )
-        RETURNING person_id INTO v_person_id;
+            p_address,
+            p_created_date
+        );
 
         -- Insert into doctor table
         INSERT INTO doctor (
             doctor_id,
             specialization,
             person_person_id,
-            deptartment_department_id,
+            department_dept_id,
             joining_exp,
             is_active
         ) VALUES (
-            NULL, -- Assuming doctor_id is auto-generated
+            v_doctor_id,
             p_specialization,
             v_person_id,
-            p_deptartment_id,
+            p_department_id,
             p_joining_exp,
             p_is_active
         );
@@ -68,10 +73,10 @@ BEGIN
     
     -- Updating
     ELSIF p_to_do = 'update' THEN
-        -- Check if doctor ID exists
-        SELECT person_person_id INTO v_person_id
-        FROM doctor
-        WHERE doctor_id = p_doctor_id;
+        -- Check if doctor email ID exists
+        SELECT person_id INTO v_person_id
+        FROM person
+        WHERE email_id = p_email_id;
         
         -- If person ID does not exist, raise an exception
         IF v_person_id IS NULL THEN
@@ -86,7 +91,6 @@ BEGIN
             dob = COALESCE(p_dob, dob),
             blood_group = COALESCE(p_blood_group, blood_group),
             gender = COALESCE(p_gender, gender),
-            created_date = COALESCE(p_created_date, created_date),
             email_id = COALESCE(p_email_id, email_id),
             phone_number = COALESCE(p_phone_number, phone_number),
             address = COALESCE(p_address, address)
@@ -97,11 +101,11 @@ BEGIN
         UPDATE doctor
         SET
             specialization = COALESCE(p_specialization, specialization),
-            deptartment_department_id = COALESCE(p_deptartment_id, deptartment_department_id),
+            department_dept_id = COALESCE(p_department_id, department_dept_id),
             joining_exp = COALESCE(p_joining_exp, joining_exp),
             is_active = COALESCE(p_is_active, is_active)
         WHERE
-            doctor_id = p_doctor_id;
+            person_person_id = v_person_id;
 
         -- Commit the transaction
         COMMIT;
@@ -111,13 +115,23 @@ BEGIN
     
     -- Deletion
     ELSIF p_to_do = 'delete' THEN
+        -- Check if doctor email ID exists
+        SELECT person_id INTO v_person_id
+        FROM person
+        WHERE email_id = p_email_id;
+        
+        -- If person ID does not exist, raise an exception
+        IF v_person_id IS NULL THEN
+            RAISE_APPLICATION_ERROR(-20001, 'Person ID does not exist.');
+        END IF;
+
         -- Delete from doctor table
         DELETE FROM doctor
-        WHERE doctor_id = p_doctor_id;
+        WHERE person_person_id = v_person_id;
 
         -- Delete from person table
         DELETE FROM person
-        WHERE person_id = (SELECT person_person_id FROM doctor WHERE doctor_id = p_doctor_id);
+        WHERE person_id = v_person_id;
         
         -- Commit the transaction
         COMMIT;
@@ -133,7 +147,7 @@ BEGIN
 EXCEPTION
     WHEN NO_DATA_FOUND THEN
         -- If the doctor_id does not exist
-        DBMS_OUTPUT.PUT_LINE('Doctor with ID ' || p_doctor_id || ' not found.');
+        DBMS_OUTPUT.PUT_LINE('Doctor with email ID ' || p_email_id || ' not found.');
     WHEN OTHERS THEN
         -- Rollback transaction in case of any error
         ROLLBACK;
@@ -141,3 +155,4 @@ EXCEPTION
         RAISE;
 END manage_doctor;
 /
+
