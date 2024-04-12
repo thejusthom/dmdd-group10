@@ -1,5 +1,5 @@
 CREATE OR REPLACE PROCEDURE manage_blood_requirement (
-    p_requirement_id             IN blood_requirement.requirement_id%TYPE,
+    p_requirement_id             IN blood_requirement.requirement_id%TYPE DEFAULT NULL,
     p_quantity_required          IN blood_requirement.quantity_required%TYPE DEFAULT NULL,
     p_blood_group                IN blood_requirement.blood_group%TYPE DEFAULT NULL,
     p_fullfilled                 IN blood_requirement.fullfilled%TYPE DEFAULT NULL,
@@ -19,7 +19,7 @@ BEGIN
             blood_camp_blood_camp_id,
             prescription_prescription_id
         ) VALUES (
-            p_requirement_id,
+            requirement_id_seq.NEXTVAL,
             p_quantity_required,
             p_blood_group,
             p_fullfilled,
