@@ -4,8 +4,8 @@ DECLARE
     v_table_exists      NUMBER;
     v_constraint_exists NUMBER;
 BEGIN
-    v_table_exists := drop_table('appointment_slot');
     v_table_exists := drop_table('appointment');
+    v_table_exists := drop_table('appointment_slot');
     v_table_exists := drop_table('donor_blood_camp_asso');
     v_table_exists := drop_table('blood_requirement');
     v_table_exists := drop_table('blood_camp');
@@ -28,11 +28,12 @@ BEGIN
     CONSTRAINT appointment_slot_pk PRIMARY KEY (slot_id))';
     dbms_output.put_line('Table appointment_slot created.');
     EXECUTE IMMEDIATE 'CREATE TABLE appointment (
+        appointment_id        NUMBER NOT NULL,
         status                VARCHAR2(50),
         patient_patient_id    NUMBER NOT NULL,
         doctor_doctor_id      NUMBER NOT NULL,
         diagnosis             VARCHAR2(50),
-        appointment_slot_slot_id NUMBER NOT NULL
+        appointment_slot_slot_id NUMBER NOT NULL,
         CONSTRAINT appointment_pk PRIMARY KEY (appointment_id))';
     dbms_output.put_line('Table appointment created.');
     EXECUTE IMMEDIATE 'CREATE TABLE donor_blood_camp_asso (
