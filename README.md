@@ -5,26 +5,27 @@ This Hospital Management System (HMS) facilitates the management of various aspe
 #### Setup Steps:
 
 1. **Execute create_app_admin.sql**: This script creates the admin user and assign permissions.
+**Login as Admin_User**: Logging in as the admin user provides administrative privileges for further setup and management.
    
-2. **Login as Admin_User**: Logging in as the admin user provides administrative privileges for further setup and management.
-   
-3. **Execute drop_role.sql**: Creates a function that drops any existing roles related to the HMS system.
+2. **Execute drop_role.sql**: Creates a function that drops any existing roles related to the HMS system.
 
-4. **Execute drop_user.sql**: Creates a function that drops any existing users related to the HMS system.
+3. **Execute drop_user.sql**: Creates a function that drops any existing users related to the HMS system.
 
-5. **Execute check_table.sql**: Creates a function that checks if the required tables exist in the database.
+4. **Execute check_table.sql**: Creates a function that checks if the required tables exist in the database.
 
-6. **Execute drop_table.sql**: Creates a function that drops any existing tables related to the HMS system.
+5. **Execute drop_table.sql**: Creates a function that drops any existing tables related to the HMS system.
 
-7. **Execute drop_sequence**: Creates a procedure to drop sequences
+6. **Execute drop_sequence**: Creates a procedure to drop sequences
 
-8. **Execute Main_PL_SQL.sql**: This script contains the main PL/SQL code for the HMS system, including procedures.
+7. **Execute create_tables.sql**: This Procedure contains the table and constraint creation for the HMS system.
 
-9.  **Execute views.sql**: This script creates views for easier data retrieval and analysis.
+8. **Execute create_views.sql**: This Procedure creates views for easier data retrieval and analysis.
 
-10. **Execute create_sequences**: Create a sequence to create all sequences
+9.  **Execute create_sequences**: Procedure to create all sequences
 
-11. **Execute User_Creation_Scripts_Project3.sql**: This script creates the necessary roles and users for the HMS system.
+10. **Execute create_users.sql**: This script creates the necessary roles and users for the HMS system.
+
+11. **Execute main_script.sql**: This script contains the main PL/SQL code for the HMS system, including procedures.
 
 12. **Execute sample_data.sql**: This script populates the tables with sample data for testing and demonstration purposes.
 

@@ -1,5 +1,6 @@
 SET SERVEROUTPUT ON 
-
+CREATE OR REPLACE PROCEDURE create_views
+IS
 BEGIN
     EXECUTE IMMEDIATE 'CREATE OR REPLACE VIEW doctor_information_view AS
         SELECT d.doctor_id, d.specialization, dept.dept_name, p.first_name, p.last_name, p.dob, p.blood_group, p.gender
@@ -54,4 +55,4 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE('No Rows Returned for SELECT INTO Statement');
 --    WHEN OTHERS THEN
 --      DBMS_OUTPUT.PUT_LINE('EXCEPTION REACHED');
-END;
+END create_views;

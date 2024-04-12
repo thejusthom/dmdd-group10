@@ -1,6 +1,6 @@
 SET SERVEROUTPUT ON
-
-DECLARE
+CREATE OR REPLACE PROCEDURE create_tables
+IS
     v_table_exists      NUMBER;
     v_constraint_exists NUMBER;
     v_error_code NUMBER;
@@ -236,4 +236,4 @@ BEGIN
         v_error_code := SQLCODE;
         v_error_msg := SUBSTR(SQLERRM, 1, 4000);
         DBMS_OUTPUT.PUT_LINE('Error Code: ' || v_error_code || ', Error Message: ' || v_error_msg);
-END;
+END create_tables;
