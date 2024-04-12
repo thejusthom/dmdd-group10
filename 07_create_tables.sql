@@ -129,7 +129,7 @@ BEGIN
     doctor_id           NUMBER NOT NULL,
     specialization      VARCHAR2(50),
     person_person_id    NUMBER NOT NULL,
-    joining_exp               DATE NOT NULL,
+    joining_exp               NUMBER NOT NULL,
     is_active                 CHAR(1) DEFAULT ''Y'' NOT NULL,
     department_dept_id NUMBER NOT NULL,
     CONSTRAINT doctor_pk PRIMARY KEY ( doctor_id ))';

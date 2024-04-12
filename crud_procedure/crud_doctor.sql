@@ -12,7 +12,7 @@ CREATE OR REPLACE PROCEDURE manage_doctor (
     p_address              IN VARCHAR2 DEFAULT NULL,
     p_specialization       IN VARCHAR2 DEFAULT NULL,
     p_department_id        IN NUMBER DEFAULT NULL,
-    p_joining_exp          IN DATE DEFAULT NULL,
+    p_joining_exp          IN NUMBER DEFAULT NULL,
     p_is_active            IN CHAR DEFAULT NULL
 ) AS
     v_person_id     NUMBER;
