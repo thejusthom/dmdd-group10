@@ -14,6 +14,7 @@ BEGIN
 	 drop_sequence('nurse_id_seq');
 	 drop_sequence('doctor_id_seq');
 	 drop_sequence('person_id_seq');
+	 drop_sequence('dept_id_seq');
 	
 	EXECUTE IMMEDIATE 'CREATE SEQUENCE appointment_id_seq START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE';
     DBMS_OUTPUT.PUT_LINE('Sequence appointment_id_seq created.');
@@ -68,6 +69,10 @@ BEGIN
     -- Create person_id_seq sequence
     EXECUTE IMMEDIATE 'CREATE SEQUENCE person_id_seq START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE';
     DBMS_OUTPUT.PUT_LINE('Sequence person_id_seq created.');
+
+    -- Create person_id_seq sequence
+    EXECUTE IMMEDIATE 'CREATE SEQUENCE dept_id_seq START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE';
+    DBMS_OUTPUT.PUT_LINE('Sequence dept_id_seq created.');
 
 EXCEPTION
     WHEN NO_DATA_FOUND THEN
