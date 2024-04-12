@@ -159,9 +159,9 @@ END manage_doctor;
 
 
 INSERT INTO department (dept_id, dept_name, hod)
-VALUES (2, 'Neurology Department', 'Dr. Smith');
+VALUES (2, 'Neurology Department', 1);
 
-EXECUTE manage_doctor('insert', NULL, 'John', 'Doe', TO_DATE('1985-05-20', 'YYYY-MM-DD'), 'O+', 'Male', SYSDATE, 'john@example.com', 1234567890, '123 Main St', 'Neurologist', 2, TO_DATE('2024-01-10', 'YYYY-MM-DD'), 'Y');
+EXECUTE manage_doctor('insert', NULL, 'John', 'Doe', TO_DATE('1985-05-20', 'YYYY-MM-DD'), 'O+', 'Male', TO_DATE('2010-05-20', 'YYYY-MM-DD'), 'john@example.com', 1234567890, '123 Main St', 'Neurologist', 2, 12, 'Y');
 
 EXECUTE manage_doctor('update', NULL, 'Jane', 'Smith', NULL, NULL, NULL, NULL, 'john@example.com');
 
