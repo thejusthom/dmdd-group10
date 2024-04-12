@@ -37,6 +37,7 @@ BEGIN
         doctor_doctor_id      NUMBER NOT NULL,
         appointment_type      VARCHAR2(50),
         diagnosis             VARCHAR2(50),
+        fee                   NUMBER 
         appointment_slot_slot_id NUMBER NOT NULL,
         CONSTRAINT appointment_pk PRIMARY KEY (appointment_id))';
     dbms_output.put_line('Table appointment created.');
@@ -67,7 +68,6 @@ BEGIN
     EXECUTE IMMEDIATE 'CREATE TABLE out_patient (
     visit_date         DATE,
     patient_patient_id NUMBER NOT NULL,
-    consultation_fee   NUMBER,
     CONSTRAINT out_patient_pk PRIMARY KEY ( patient_patient_id ))';
     dbms_output.put_line('Table out_patient created.');
     EXECUTE IMMEDIATE 'CREATE TABLE health_report (
