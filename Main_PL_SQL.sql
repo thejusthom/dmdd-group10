@@ -150,6 +150,7 @@ BEGIN
     email_id     VARCHAR2(200) NOT NULL,
     phone_number NUMBER NOT NULL,
     address      VARCHAR2(200) NOT NULL,
+    created_date Date,
     CONSTRAINT person_pk PRIMARY KEY ( person_id ))';
     dbms_output.put_line('Table person created.');
     
