@@ -57,4 +57,3 @@ EXCEPTION
 --      DBMS_OUTPUT.PUT_LINE('EXCEPTION REACHED');
 END create_views;
 /
-EXECUTE create_views;
