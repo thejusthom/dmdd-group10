@@ -129,7 +129,7 @@ BEGIN
     doctor_id           NUMBER NOT NULL,
     specialization      VARCHAR2(50),
     person_person_id    NUMBER NOT NULL,
-    joining_exp               DATE NOT NULL,
+    joining_exp               NUMBER NOT NULL,
     is_active                 CHAR(1) DEFAULT ''Y'' NOT NULL,
     department_dept_id NUMBER NOT NULL,
     CONSTRAINT doctor_pk PRIMARY KEY ( doctor_id ))';
@@ -137,7 +137,7 @@ BEGIN
     EXECUTE IMMEDIATE 'CREATE TABLE department (
     dept_id   NUMBER NOT NULL,
     dept_name VARCHAR2(100),
-    hod       VARCHAR2(200),
+    hod       NUMBER NOT NULL,
     CONSTRAINT department_pk PRIMARY KEY ( dept_id ))';
     dbms_output.put_line('Table department created.');
     EXECUTE IMMEDIATE 'CREATE TABLE person (
@@ -238,5 +238,3 @@ BEGIN
         DBMS_OUTPUT.PUT_LINE('Error Code: ' || v_error_code || ', Error Message: ' || v_error_msg);
 END create_tables;
 /
-
-EXECUTE create_tables;
