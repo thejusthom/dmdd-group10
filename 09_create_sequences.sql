@@ -91,3 +91,5 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE('EXCEPTION REACHED');
 END;
 /
+
+EXECUTE create_sequences;

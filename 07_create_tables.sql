@@ -237,3 +237,6 @@ BEGIN
         v_error_msg := SUBSTR(SQLERRM, 1, 4000);
         DBMS_OUTPUT.PUT_LINE('Error Code: ' || v_error_code || ', Error Message: ' || v_error_msg);
 END create_tables;
+/
+
+EXECUTE create_tables;
