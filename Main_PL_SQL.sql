@@ -147,7 +147,7 @@ BEGIN
     dob         DATE,
     blood_group VARCHAR2(10),
     gender      VARCHAR2(10),
-    email_id     VARCHAR2(200) NOT NULL,
+    email_id     VARCHAR2(200) NOT NULL UNIQUE,
     phone_number NUMBER NOT NULL,
     address      VARCHAR2(200) NOT NULL,
     created_date Date,
