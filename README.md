@@ -18,9 +18,9 @@ This Hospital Management System (HMS) facilitates the management of various aspe
 
 7. **Execute Main_PL_SQL.sql**: This script contains the main PL/SQL code for the HMS system, including procedures.
 
-8.  **Execute User_Creation_Scripts_Project3.sql**: This script creates the necessary roles and users for the HMS system.
+8. **Execute views.sql**: This script creates views for easier data retrieval and analysis.
 
-9.  **Execute views.sql**: This script creates views for easier data retrieval and analysis.
+9.  **Execute User_Creation_Scripts_Project3.sql**: This script creates the necessary roles and users for the HMS system.
 
 10. **Execute sample_data.sql**: This script populates the tables with sample data for testing and demonstration purposes.
 
