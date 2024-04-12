@@ -29,9 +29,11 @@ BEGIN
     dbms_output.put_line('Table appointment_slot created.');
     EXECUTE IMMEDIATE 'CREATE TABLE appointment (
         appointment_id        NUMBER NOT NULL,
+        appointment_date DATE,
         status                VARCHAR2(50),
         patient_patient_id    NUMBER NOT NULL,
         doctor_doctor_id      NUMBER NOT NULL,
+        appointment_type      VARCHAR2(50),
         diagnosis             VARCHAR2(50),
         appointment_slot_slot_id NUMBER NOT NULL,
         CONSTRAINT appointment_pk PRIMARY KEY (appointment_id))';
