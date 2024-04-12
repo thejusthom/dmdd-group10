@@ -27,7 +27,6 @@ CREATE OR REPLACE PROCEDURE complete_appointment (
 
 BEGIN
     -- Check if the appointment_id exists
-     DBMS_OUTPUT.PUT_LINE('Appointment id is correct');
     SELECT COUNT(*)
     INTO v_count
     FROM appointment
@@ -58,27 +57,32 @@ BEGIN
         IF v_count = 0 THEN
             RAISE blood_camp_error;
         END IF;
+        DBMS_OUTPUT.PUT_LINE('Blood camp id is correct');
     END IF;
 
     -- Update appointment status to 'completed'
     UPDATE appointment
     SET status = 'completed', fee = p_fee
     WHERE appointment_id = p_appointment_id;
+    DBMS_OUTPUT.PUT_LINE('Appointment updated');
 
     -- Insert health report
     INSERT INTO health_report (report_id, bp, pulse, weight, height, general_condition, patient_patient_id)
     VALUES (report_id_seq.NEXTVAL, p_bp, p_pulse, p_weight, p_height, p_general_condition, v_patient_id)
     RETURNING report_id INTO v_health_report_id;
+    DBMS_OUTPUT.PUT_LINE('Health report updated');
 
     -- Insert prescription
     INSERT INTO prescription (prescription_id, patient_patient_id, prescription_date)
     VALUES (prescription_id_seq.NEXTVAL, v_patient_id, p_prescription_date)
     RETURNING prescription_id INTO v_prescription_id;
+    DBMS_OUTPUT.PUT_LINE('Prescription updated');
 
     -- Insert medicine
     INSERT INTO medicine (medicine_id, duration, dosage_per_day, quantity, prescription_prescription_id)
     VALUES (medicine_id_seq.NEXTVAL, p_medicine_duration, p_medicine_dosage_per_day, p_medicine_quantity, v_prescription_id)
     RETURNING medicine_id INTO v_medicine_id;
+    DBMS_OUTPUT.PUT_LINE('Medicine updated');
 
     -- Insert blood requirement if applicable
     IF p_blood_camp_id IS NOT NULL THEN
