@@ -83,5 +83,5 @@ EXCEPTION
         ROLLBACK;
         dbms_output.put_line('Error: ' || SQLERRM);
     END IF;
-END;
+END manage_blood_camp;
 /

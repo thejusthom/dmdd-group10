@@ -1,7 +1,6 @@
 SET SERVEROUTPUT ON
-
-DECLARE
-  -- Function to drop user and return 1 if dropped successfully or 0 if an exception occurs
+CREATE OR REPLACE PROCEDURE create_users
+IS
   v_user_exists NUMBER;
   v_role_exists NUMBER;
   v_error_code NUMBER;
@@ -80,5 +79,5 @@ EXCEPTION
         v_error_code := SQLCODE;
         v_error_msg := SUBSTR(SQLERRM, 1, 4000);
         DBMS_OUTPUT.PUT_LINE('Error Code: ' || v_error_code || ', Error Message: ' || v_error_msg);
-END;
+END create_users;
 /

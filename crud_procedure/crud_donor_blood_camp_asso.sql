@@ -70,5 +70,5 @@ EXCEPTION
     WHEN OTHERS THEN
         ROLLBACK;
         dbms_output.put_line('Error: ' || SQLERRM);
-END;
+END manage_donor_blood_camp_asso;
 /
