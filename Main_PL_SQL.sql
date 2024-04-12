@@ -37,7 +37,7 @@ BEGIN
         doctor_doctor_id      NUMBER NOT NULL,
         appointment_type      VARCHAR2(50),
         diagnosis             VARCHAR2(50),
-        fee                   NUMBER 
+        fee                   NUMBER, 
         appointment_slot_slot_id NUMBER NOT NULL,
         CONSTRAINT appointment_pk PRIMARY KEY (appointment_id))';
     dbms_output.put_line('Table appointment created.');
@@ -89,9 +89,8 @@ BEGIN
     dbms_output.put_line('Table in_patient created.');
     EXECUTE IMMEDIATE 'CREATE TABLE medicine (
     medicine_id                  NUMBER NOT NULL,
-    dosage                       VARCHAR2(20),
     quantity                     NUMBER,
-    "DOSAGE/DAY"                 VARCHAR2(20) NOT NULL,
+    dosage_per_day                 VARCHAR2(20) NOT NULL,
     prescription_prescription_id NUMBER NOT NULL,
     CONSTRAINT medicine_pk PRIMARY KEY ( medicine_id ))';
     dbms_output.put_line('Table medicine created.');
