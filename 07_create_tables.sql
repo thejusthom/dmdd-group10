@@ -51,9 +51,9 @@ BEGIN
     dbms_output.put_line('Table donor_blood_camp_asso created.');
     EXECUTE IMMEDIATE 'CREATE TABLE blood_requirement (
     requirement_id               NUMBER NOT NULL,
-    quantity_required            NUMBER,
-    blood_group                  VARCHAR2(5),
-    fullfilled                   CHAR(1),
+    quantity_required            NUMBER NOT NULL,
+    blood_group                  VARCHAR2(5) NOT NULL,
+    fullfilled                   CHAR(1) NOT NULL,
     blood_camp_blood_camp_id     NUMBER NOT NULL,
     prescription_prescription_id NUMBER NOT NULL,
     CONSTRAINT blood_requirement_pk PRIMARY KEY (requirement_id, blood_camp_blood_camp_id))';
