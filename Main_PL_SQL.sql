@@ -3,6 +3,8 @@ SET SERVEROUTPUT ON
 DECLARE
     v_table_exists      NUMBER;
     v_constraint_exists NUMBER;
+    v_error_code NUMBER;
+    v_error_msg VARCHAR2(4000);
 BEGIN
     v_table_exists := drop_table('appointment');
     v_table_exists := drop_table('appointment_slot');
@@ -109,9 +111,6 @@ BEGIN
     person_person_id  NUMBER NOT NULL,
     CONSTRAINT donor_pk PRIMARY KEY ( donor_id ))';
     dbms_output.put_line('Table donor created.');
-    EXECUTE IMMEDIATE 'CREATE UNIQUE INDEX contact_details__idx ON contact_details (
-    person_person_id ASC)';
-    dbms_output.put_line('Unique Index contact_details__idx created.');
     EXECUTE IMMEDIATE 'CREATE TABLE shift_nurse (
     shift_id       NUMBER NOT NULL,
     nurse_nurse_id NUMBER NOT NULL,
@@ -122,7 +121,7 @@ BEGIN
     nurse_id            NUMBER NOT NULL,
     department_dept_id NUMBER NOT NULL,
     person_person_id    NUMBER NOT NULL,
-    is_active                 CHAR(1) DEFAULT 'Y' NOT NULL,
+    is_active                 CHAR(1) DEFAULT ''Y'' NOT NULL,
     CONSTRAINT nurse_pk PRIMARY KEY ( nurse_id ))';
     dbms_output.put_line('Table nurse created.');
     EXECUTE IMMEDIATE 'CREATE TABLE doctor (
@@ -130,7 +129,7 @@ BEGIN
     specialization      VARCHAR2(50),
     person_person_id    NUMBER NOT NULL,
     joining_exp               DATE NOT NULL,
-    is_active                 CHAR(1) NOT NULL,
+    is_active                 CHAR(1) DEFAULT ''Y'' NOT NULL,
     department_dept_id NUMBER NOT NULL,
     CONSTRAINT doctor_pk PRIMARY KEY ( doctor_id ))';
     dbms_output.put_line('Table doctor created.');
@@ -206,10 +205,6 @@ BEGIN
     ADD CONSTRAINT donor_person_fk FOREIGN KEY ( person_person_id )
         REFERENCES person ( person_id )';
     dbms_output.put_line('FK Constraints for donor.');
-    EXECUTE IMMEDIATE 'ALTER TABLE contact_details
-    ADD CONSTRAINT contact_details_person_fk FOREIGN KEY ( person_person_id )
-        REFERENCES person ( person_id )';
-    dbms_output.put_line('FK Constraints for contact_details.');
     EXECUTE IMMEDIATE 'ALTER TABLE shift_nurse
     ADD CONSTRAINT shift_nurse_nurse_fk FOREIGN KEY ( nurse_nurse_id )
         REFERENCES nurse ( nurse_id )';
@@ -236,5 +231,7 @@ BEGIN
     WHEN PROGRAM_ERROR THEN
         DBMS_OUTPUT.PUT_LINE('PL/SQL has an internal problem');
     WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('EXCEPTION REACHED');
+        v_error_code := SQLCODE;
+        v_error_msg := SUBSTR(SQLERRM, 1, 4000);
+        DBMS_OUTPUT.PUT_LINE('Error Code: ' || v_error_code || ', Error Message: ' || v_error_msg);
 END;
