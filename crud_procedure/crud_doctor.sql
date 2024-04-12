@@ -156,23 +156,3 @@ EXCEPTION
 END manage_doctor;
 /
 
-
-
-INSERT INTO department (dept_id, dept_name, hod)
-VALUES (2, 'Neurology Department', 1);
-
-EXECUTE manage_doctor('insert', NULL, 'John', 'Doe', TO_DATE('1985-05-20', 'YYYY-MM-DD'), 'O+', 'Male', TO_DATE('2010-05-20', 'YYYY-MM-DD'), 'john@example.com', 1234567890, '123 Main St', 'Neurologist', 2, 12, 'Y');
-
-EXECUTE manage_doctor('update', NULL, 'Jane', 'Smith', NULL, NULL, NULL, NULL, 'john@example.com');
-
-EXECUTE manage_doctor('delete', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'john@example.com');
-
-
-select * from doctor;
-select * from person;
-delete from department;
-delete from doctor;
-delete from person;
-
-SELECT person_person_id FROM doctor WHERE doctor_id = 4;
-
