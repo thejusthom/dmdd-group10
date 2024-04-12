@@ -137,7 +137,7 @@ BEGIN
     EXECUTE IMMEDIATE 'CREATE TABLE department (
     dept_id   NUMBER NOT NULL,
     dept_name VARCHAR2(100),
-    hod       VARCHAR2(200),
+    hod       NUMBER NOT NULL,
     CONSTRAINT department_pk PRIMARY KEY ( dept_id ))';
     dbms_output.put_line('Table department created.');
     EXECUTE IMMEDIATE 'CREATE TABLE person (
