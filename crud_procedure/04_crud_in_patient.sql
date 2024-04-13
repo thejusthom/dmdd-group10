@@ -149,22 +149,3 @@ EXCEPTION
 END manage_in_patient;
 /
 
-
-BEGIN
-    manage_in_patient(
-        'insert',                           -- Operation: insert
-        'john@example.com',                -- Email ID
-        'John',                             -- First name
-        'Doe',                              -- Last name
-        TO_DATE('1980-01-01', 'YYYY-MM-DD'),-- Date of Birth
-        'O+',                               -- Blood group
-        'Male',                             -- Gender
-        '123 Main St',                      -- Address
-        1234567890,                         -- Phone number
-        TO_DATE('2024-04-10', 'YYYY-MM-DD'),-- Admission date
-        TO_DATE('2024-04-15', 'YYYY-MM-DD'),-- Discharge date
-        101                                 -- Room number
-    );
-END;
-/
-
