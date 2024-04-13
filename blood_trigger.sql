@@ -7,6 +7,7 @@ DECLARE
     blood_error EXCEPTION;
 BEGIN
     -- Check available blood for the specified blood group and not consumed
+    DBMS_OUTPUT.PUT_LINE('Blood requirement triggered');
     SELECT
         COUNT(donor_donor_id)
     INTO v_available_blood
@@ -18,6 +19,7 @@ BEGIN
             p.blood_group = :new.blood_group
         AND dbca.donated_date >= sysdate - 42
         AND dbca.isbloodconsumed = 'N';
+    DBMS_OUTPUT.PUT_LINE('Number of counts available: ' || v_available_blood);
 
     IF v_available_blood >= :new.quantity_required THEN
         -- Update isbloodconsumed to 'Y' for the specified blood group and other criteria
@@ -40,8 +42,9 @@ BEGIN
         ) src ON ( dbca.rowid = src.rid )
         WHEN MATCHED THEN UPDATE
         SET dbca.isbloodconsumed = 'Y';
-        dbms_output.put_line(v_available_blood);
+        DBMS_OUTPUT.PUT_LINE('Updated the isbloodConsumed as Y');
         :new.fullfilled := 'Y';     
+        DBMS_OUTPUT.PUT_LINE('Updated the fulfilled as Y');
 
     ELSE
         RAISE blood_error;
