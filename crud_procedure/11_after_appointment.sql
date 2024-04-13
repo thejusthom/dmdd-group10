@@ -103,5 +103,5 @@ EXCEPTION
         ROLLBACK;
     WHEN OTHERS THEN
         ROLLBACK;
-        DBMS_OUTPUT.PUT_LINE('Error: ' || SQLERRM);
+        DBMS_OUTPUT.PUT_LINE('Exception reached' );
 END complete_appointment;
