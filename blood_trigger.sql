@@ -36,7 +36,8 @@ BEGIN
                 JOIN donor  d ON dbca.donor_donor_id = d.donor_id
                 JOIN person p ON d.person_person_id = p.person_id
             WHERE
-                    dbca.isbloodconsumed = 'N'
+                dbca.isbloodconsumed = 'N'
+                AND p.blood_group = :new.blood_group
                 AND dbca.donated_date >= sysdate - 42
                 AND ROWNUM <= :new.quantity_required
         ) src ON ( dbca.rowid = src.rid )
