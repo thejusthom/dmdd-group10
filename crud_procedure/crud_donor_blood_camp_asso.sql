@@ -7,6 +7,7 @@ CREATE OR REPLACE PROCEDURE manage_donor_blood_camp_asso (
 IS
     v_row_count NUMBER;
     v_donor_id donor.donor_id%TYPE;
+    v_donated_date DATE;
 BEGIN
     -- Get donor_id based on email_id
     SELECT donor_id INTO v_donor_id
@@ -32,24 +33,24 @@ BEGIN
         dbms_output.put_line('Data inserted successfully.');
         
     ELSIF p_action = 'UPDATE' THEN
-        SELECT COUNT(*)
-        INTO v_row_count
+        -- Check if the donated date is within 14 days
+        SELECT donated_date INTO v_donated_date
         FROM donor_blood_camp_asso
         WHERE donor_blood_id = p_donor_blood_id;
 
-        IF v_row_count = 0 THEN
-            dbms_output.put_line('No record found to update.');
-            RETURN;
-        END IF;
+        IF SYSDATE - v_donated_date <= 14 THEN
+            dbms_output.put_line('You cannot donate blood again within 14 days of your last donation.');
+        ELSE
+            -- Update operation if the donated date is more than 14 days ago
+            UPDATE donor_blood_camp_asso
+            SET
+                blood_camp_blood_camp_id = NVL(p_blood_camp_id, blood_camp_blood_camp_id)
+            WHERE
+                donor_blood_id = p_donor_blood_id;
 
-        UPDATE donor_blood_camp_asso
-        SET
-            blood_camp_blood_camp_id = NVL(p_blood_camp_id, blood_camp_blood_camp_id)
-        WHERE
-            donor_blood_id = p_donor_blood_id;
-        
-        COMMIT;
-        dbms_output.put_line('Data updated successfully.');
+            COMMIT;
+            dbms_output.put_line('Data updated successfully.');
+        END IF;
         
     ELSIF p_action = 'DELETE' THEN
         SELECT COUNT(*)
