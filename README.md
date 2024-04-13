@@ -19,7 +19,7 @@ This Hospital Management System (HMS) facilitates the management of various aspe
 
 7. **Execute create_tables.sql**: This Procedure contains the table and constraint creation for the HMS system.
 
-8. **Execute create_views.sql**: This Procedure creates views for easier data retrieval and analysis.
+8. **Execute create_reports.sql**: This Procedure creates views for easier data retrieval and analysis.
 
 9.  **Execute create_sequences**: Procedure to create all sequences
 
@@ -27,7 +27,9 @@ This Hospital Management System (HMS) facilitates the management of various aspe
 
 11. **Execute main_script.sql**: This script contains the main PL/SQL code for the HMS system, including procedures.
 
-12. **Execute sample_data.sql**: This script populates the tables with sample data for testing and demonstration purposes.
+12. **Execute demo_data_execution.sql**: This script populates the tables with sample data for testing and demonstration purposes.
+
+13. **Execute demo_data_execution_non_admin.sql**: This script must be run by non-admin users.
 
 #### Available Tables:
 
