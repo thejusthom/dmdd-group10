@@ -11,19 +11,19 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Inserted department');
 
     -- Adding 5 doctor records
-    manage_doctor('insert', NULL, 'Michael', 'Smith', TO_DATE('1980-05-15', 'YYYY-MM-DD'), 'AB+', 'Male', SYSDATE, 'michael@example.com', 1234567890, '456 Oak St', 'Cardiologist', 1, 4, 'Y');
-    manage_doctor('insert', NULL, 'Jennifer', 'Brown', TO_DATE('1975-08-20', 'YYYY-MM-DD'), 'A-', 'Female', SYSDATE, 'jennifer@example.com', 1234567891, '789 Elm St', 'Neurologist', 2, 5, 'Y');
-    manage_doctor('insert', NULL, 'Christopher', 'Lee', TO_DATE('1982-03-10', 'YYYY-MM-DD'), 'O+', 'Male', SYSDATE, 'christopher@example.com', 1234567892, '101 Pine St', 'Orthopedic Surgeon', 4, 6, 'Y');
-    manage_doctor('insert', NULL, 'Sarah', 'Clark', TO_DATE('1978-11-25', 'YYYY-MM-DD'), 'B+', 'Female', SYSDATE, 'sarah@example.com', 1234567893, '222 Maple St', 'Pediatrician', 5, 11, 'Y');
-    manage_doctor('insert', NULL, 'Daniel', 'Taylor', TO_DATE('1985-07-30', 'YYYY-MM-DD'), 'AB-', 'Male', SYSDATE, 'daniel@example.com', 1234567894, '333 Cedar St', 'Oncologist', 3, 12, 'Y');
+    manage_doctor('insert', NULL, 'Michael', 'Smith', TO_DATE('1980-05-15', 'YYYY-MM-DD'), 'AB+', 'Male', SYSDATE, 'michael@example.com', 1234567890, '456 Oak St', 'Cardiologist', dept_id_seq.currval, 4, 'Y');
+    manage_doctor('insert', NULL, 'Jennifer', 'Brown', TO_DATE('1975-08-20', 'YYYY-MM-DD'), 'A-', 'Female', SYSDATE, 'jennifer@example.com', 1234567891, '789 Elm St', 'Neurologist', dept_id_seq.currval-1, 5, 'Y');
+    manage_doctor('insert', NULL, 'Christopher', 'Lee', TO_DATE('1982-03-10', 'YYYY-MM-DD'), 'O+', 'Male', SYSDATE, 'christopher@example.com', 1234567892, '101 Pine St', 'Orthopedic Surgeon', dept_id_seq.currval-1, 6, 'Y');
+    manage_doctor('insert', NULL, 'Sarah', 'Clark', TO_DATE('1978-11-25', 'YYYY-MM-DD'), 'B+', 'Female', SYSDATE, 'sarah@example.com', 1234567893, '222 Maple St', 'Pediatrician', dept_id_seq.currval-2, 11, 'Y');
+    manage_doctor('insert', NULL, 'Daniel', 'Taylor', TO_DATE('1985-07-30', 'YYYY-MM-DD'), 'AB-', 'Male', SYSDATE, 'daniel@example.com', 1234567894, '333 Cedar St', 'Oncologist', dept_id_seq.currval-3, 12, 'Y');
     DBMS_OUTPUT.PUT_LINE('Inserted doctor');
 
      -- Adding 5 nurse records
-    manage_nurse('insert', 'nurse1@example.com', 'Emily', 'Johnson', TO_DATE('1990-08-15', 'YYYY-MM-DD'), 'O+', 'Female', SYSDATE, 1234567890, '456 Oak St', 2, 'Y');
-    manage_nurse('insert', 'nurse2@example.com', 'Sarah', 'Smith', TO_DATE('1985-04-20', 'YYYY-MM-DD'), 'A-', 'Female', SYSDATE, 9876543210, '789 Elm St', 3, 'Y');
-    manage_nurse('insert', 'nurse3@example.com', 'Michael', 'Brown', TO_DATE('1988-11-10', 'YYYY-MM-DD'), 'B+', 'Male', SYSDATE, 5551234567, '101 Pine St', 4, 'Y');
-    manage_nurse('insert', 'nurse4@example.com', 'Jessica', 'Wilson', TO_DATE('1992-02-05', 'YYYY-MM-DD'), 'AB-', 'Female', SYSDATE, 1112223333, '321 Cedar St', 5, 'Y');
-    manage_nurse('insert', 'nurse5@example.com', 'David', 'Lee', TO_DATE('1983-06-30', 'YYYY-MM-DD'), 'O-', 'Male', SYSDATE, 9998887777, '654 Maple St', 1, 'Y');
+    manage_nurse('insert', 'nurse1@example.com', 'Emily', 'Johnson', TO_DATE('1990-08-15', 'YYYY-MM-DD'), 'O+', 'Female', SYSDATE, 1234567890, '456 Oak St', dept_id_seq.currval-1, 'Y');
+    manage_nurse('insert', 'nurse2@example.com', 'Sarah', 'Smith', TO_DATE('1985-04-20', 'YYYY-MM-DD'), 'A-', 'Female', SYSDATE, 9876543210, '789 Elm St', dept_id_seq.currval-1, 'Y');
+    manage_nurse('insert', 'nurse3@example.com', 'Michael', 'Brown', TO_DATE('1988-11-10', 'YYYY-MM-DD'), 'B+', 'Male', SYSDATE, 5551234567, '101 Pine St', dept_id_seq.currval, 'Y');
+    manage_nurse('insert', 'nurse4@example.com', 'Jessica', 'Wilson', TO_DATE('1992-02-05', 'YYYY-MM-DD'), 'AB-', 'Female', SYSDATE, 1112223333, '321 Cedar St', dept_id_seq.currval-3, 'Y');
+    manage_nurse('insert', 'nurse5@example.com', 'David', 'Lee', TO_DATE('1983-06-30', 'YYYY-MM-DD'), 'O-', 'Male', SYSDATE, 9998887777, '654 Maple St', dept_id_seq.currval-2, 'Y');
 
     DBMS_OUTPUT.PUT_LINE('Inserted nurse');
     
